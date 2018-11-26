@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="BenteY | Blog">
 <meta property="og:description" content="我们在日常工作中会遇到公司有个gitlab，还有些自己的一些项目放在github上。这样就导致我们要配置不同的ssh-key对应不同的环境。下面我们来看看具体的操作： 生成一个公司用的SSH-key1$ ssh-keygen -t rsa -C &quot;youremail@yourcompany.com” -f ~/.ssh/id_rsa 在~/.ssh/目录会生成id_rsa和id_rsa.pub私钥">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-26T08:33:27.000Z">
+<meta property="og:updated_time" content="2018-11-26T08:47:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何配置多个SSH-key">
 <meta name="twitter:description" content="我们在日常工作中会遇到公司有个gitlab，还有些自己的一些项目放在github上。这样就导致我们要配置不同的ssh-key对应不同的环境。下面我们来看看具体的操作： 生成一个公司用的SSH-key1$ ssh-keygen -t rsa -C &quot;youremail@yourcompany.com” -f ~/.ssh/id_rsa 在~/.ssh/目录会生成id_rsa和id_rsa.pub私钥">
@@ -170,6 +170,7 @@
         <p>我们在日常工作中会遇到公司有个gitlab，还有些自己的一些项目放在github上。这样就导致我们要配置不同的ssh-key对应不同的环境。下面我们来看看具体的操作：</p>
 <h4 id="生成一个公司用的SSH-key"><a href="#生成一个公司用的SSH-key" class="headerlink" title="生成一个公司用的SSH-key"></a>生成一个公司用的SSH-key</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@yourcompany.com” -f ~/.ssh/id_rsa</span></span><br></pre></td></tr></table></figure>
 <p>在~/.ssh/目录会生成id_rsa和id_rsa.pub私钥和公钥。我们将id_rsa.pub中的内容粘帖到公司gitlab服务器的SSH-key的配置中。</p>
+<a id="more"></a>
 <h4 id="生成一个github用的SSH-key"><a href="#生成一个github用的SSH-key" class="headerlink" title="生成一个github用的SSH-key"></a>生成一个github用的SSH-key</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@your.com” -f ~/.ssh/id_rsa_github</span></span><br></pre></td></tr></table></figure>
 <p>在~/.ssh/目录会生成id_rsa_github和id_rsa_github.pub私钥和公钥。我们将id_rsa_github.pub中的内容粘帖到github服务器的SSH-key的配置中。</p>
 <h4 id="添加私钥"><a href="#添加私钥" class="headerlink" title="添加私钥"></a>添加私钥</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-add ~/.ssh/id_rsa </span><br><span class="line">$ ssh-add ~/.ssh/id_rsa_github</span><br></pre></td></tr></table></figure>
