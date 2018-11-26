@@ -144,19 +144,106 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Mac下使用Hexo+Github搭建个人博客" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+    <article id="post-如何配置多个SSH-key" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/15/Mac下使用Hexo+Github搭建个人博客/">Mac下使用Hexo+Github搭建个人博客</a>
+      <a class="article-title" href="/2018/11/26/如何配置多个SSH-key/">如何配置多个SSH-key</a>
     </h1>
   
 
         
-        <a href="/2018/11/15/Mac下使用Hexo+Github搭建个人博客/" class="archive-article-date">
+        <a href="/2018/11/26/如何配置多个SSH-key/" class="archive-article-date">
+  	<time datetime="2018-11-26T07:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们在日常工作中会遇到公司有个gitlab，还有些自己的一些项目放在github上。这样就导致我们要配置不同的ssh-key对应不同的环境。下面我们来看看具体的操作：</p>
+<h4 id="生成一个公司用的SSH-key"><a href="#生成一个公司用的SSH-key" class="headerlink" title="生成一个公司用的SSH-key"></a>生成一个公司用的SSH-key</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@yourcompany.com” -f ~/.ssh/id_rsa</span></span><br></pre></td></tr></table></figure>
+<p>在~/.ssh/目录会生成id_rsa和id_rsa.pub私钥和公钥。我们将id_rsa.pub中的内容粘帖到公司gitlab服务器的SSH-key的配置中。</p>
+<h4 id="生成一个github用的SSH-key"><a href="#生成一个github用的SSH-key" class="headerlink" title="生成一个github用的SSH-key"></a>生成一个github用的SSH-key</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@your.com” -f ~/.ssh/id_rsa_github</span></span><br></pre></td></tr></table></figure>
+<p>在~/.ssh/目录会生成id_rsa_github和id_rsa_github.pub私钥和公钥。我们将id_rsa_github.pub中的内容粘帖到github服务器的SSH-key的配置中。</p>
+<h4 id="添加私钥"><a href="#添加私钥" class="headerlink" title="添加私钥"></a>添加私钥</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-add ~/.ssh/id_rsa </span><br><span class="line">$ ssh-add ~/.ssh/id_rsa_github</span><br></pre></td></tr></table></figure>
+<p>如果执行ssh-add时提示”Could not open a connection to your authentication agent”，可以执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-agent bash</span><br></pre></td></tr></table></figure></p>
+<p>然后再运行ssh-add命令。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可以通过 ssh-add -l 来确私钥列表</span></span><br><span class="line">$ ssh-add -l</span><br><span class="line"><span class="comment"># 可以通过 ssh-add -D 来清空私钥列表</span></span><br><span class="line">$ ssh-add -D</span><br></pre></td></tr></table></figure></p>
+<h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><p>在~/.ssh 目录下新建一个config文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch config</span><br></pre></td></tr></table></figure></p>
+<p>添加内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gitlab</span></span><br><span class="line">Host gitlab.com</span><br><span class="line">Port 8888</span><br><span class="line">User bentey</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br><span class="line"></span><br><span class="line"><span class="comment"># blog</span></span><br><span class="line">Host github.com</span><br><span class="line">HostName github.com</span><br><span class="line">User bentey</span><br><span class="line">IdentityFile ~/.ssh/id_rsa_github</span><br></pre></td></tr></table></figure></p>
+<h4 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">benteydeiMac:~ bentey$ <span class="built_in">cd</span> ~/.ssh</span><br><span class="line">benteydeiMac:.ssh bentey$ ls -la</span><br><span class="line">total 48</span><br><span class="line">drwx------   8 bentey  staff   272 11 25 13:27 .</span><br><span class="line">drwxr-xr-x+ 32 bentey  staff  1088 11 26 14:51 ..</span><br><span class="line">-rw-r--r--@  1 bentey  staff   164 11 25 13:27 config</span><br><span class="line">-rw-------   1 bentey  staff  1679 11 22 20:33 id_rsa</span><br><span class="line">-rw-r--r--   1 bentey  staff   395 11 22 20:33 id_rsa.pub</span><br><span class="line">-rw-------   1 bentey  staff  1679 11 25 12:48 id_rsa_github</span><br><span class="line">-rw-r--r--   1 bentey  staff   398 11 25 12:48 id_rsa_github.pub</span><br><span class="line">-rw-r--r--   1 bentey  staff  1197 11 25 13:12 known_hosts</span><br></pre></td></tr></table></figure>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi BenteY! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure></p>
+<p>就表示成功的连上github了。也可以试试连接公司的gitlab。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssh</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/26/如何配置多个SSH-key/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Mac下使用Hexo+Github搭建个人博客 下午2.34.01" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/15/Mac下使用Hexo+Github搭建个人博客 下午2.34.01/">Mac下使用Hexo+Github搭建个人博客</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/15/Mac下使用Hexo+Github搭建个人博客 下午2.34.01/" class="archive-article-date">
   	<time datetime="2018-11-15T10:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-15</time>
 </a>
         
@@ -173,7 +260,7 @@
 </ul>
 </blockquote>
         
-          <a class="article-more-a" href="/2018/11/15/Mac下使用Hexo+Github搭建个人博客/#more">more >></a>
+          <a class="article-more-a" href="/2018/11/15/Mac下使用Hexo+Github搭建个人博客 下午2.34.01/#more">more >></a>
         
       
 
@@ -205,7 +292,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/15/Mac下使用Hexo+Github搭建个人博客/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/11/15/Mac下使用Hexo+Github搭建个人博客 下午2.34.01/">展开全文 >></a>
         </p>
       
 
@@ -329,6 +416,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ssh</a>
               </li>
             
             <div class="clearfix"></div>
