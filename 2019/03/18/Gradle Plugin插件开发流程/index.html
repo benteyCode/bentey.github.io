@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Gradle Plugin插件开发流程 | bentey | blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Gradle Plugin插件开发流程创建项目在Android Studio中新建Java Library module plugin 修改build.gradle文件">
+  <meta name="description" content="创建项目在Android Studio中新建Java Library module plugin 修改build.gradle文件">
 <meta name="keywords" content="Gradle,Plugin,Dependence">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gradle Plugin插件开发流程">
 <meta property="og:url" content="http://yoursite.com/2019/03/18/Gradle Plugin插件开发流程/index.html">
 <meta property="og:site_name" content="bentey | blog">
-<meta property="og:description" content="Gradle Plugin插件开发流程创建项目在Android Studio中新建Java Library module plugin 修改build.gradle文件">
+<meta property="og:description" content="创建项目在Android Studio中新建Java Library module plugin 修改build.gradle文件">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://github.com/bentey/Dependence/blob/master/screenshot/01.png?raw=true">
 <meta property="og:image" content="https://github.com/bentey/Dependence/blob/master/screenshot/03.png?raw=true">
 <meta property="og:image" content="https://github.com/bentey/Dependence/blob/master/screenshot/02.png?raw=true">
-<meta property="og:updated_time" content="2019-03-18T08:03:25.513Z">
+<meta property="og:updated_time" content="2019-03-18T08:07:19.409Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gradle Plugin插件开发流程">
-<meta name="twitter:description" content="Gradle Plugin插件开发流程创建项目在Android Studio中新建Java Library module plugin 修改build.gradle文件">
+<meta name="twitter:description" content="创建项目在Android Studio中新建Java Library module plugin 修改build.gradle文件">
 <meta name="twitter:image" content="https://github.com/bentey/Dependence/blob/master/screenshot/01.png?raw=true">
   
     <link rel="alternative" href="/atom.xml" title="bentey | blog" type="application/atom+xml">
@@ -171,7 +171,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Gradle-Plugin插件开发流程"><a href="#Gradle-Plugin插件开发流程" class="headerlink" title="Gradle Plugin插件开发流程"></a>Gradle Plugin插件开发流程</h3><h4 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h4><p>在Android Studio中新建Java Library module plugin</p>
+        <h4 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h4><p>在Android Studio中新建Java Library module plugin</p>
 <h4 id="修改build-gradle文件"><a href="#修改build-gradle文件" class="headerlink" title="修改build.gradle文件"></a>修改build.gradle文件</h4><p><img src="https://github.com/bentey/Dependence/blob/master/screenshot/01.png?raw=true" alt="01"><br><a id="more"></a></p>
 <h4 id="修改项目文件夹"><a href="#修改项目文件夹" class="headerlink" title="修改项目文件夹"></a>修改项目文件夹</h4><p>src/main项目文件如下</p>
 <ul>
@@ -340,7 +340,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradle-Plugin插件开发流程"><span class="toc-number">1.</span> <span class="toc-text">Gradle Plugin插件开发流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建项目"><span class="toc-number">1.1.</span> <span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改build-gradle文件"><span class="toc-number">1.2.</span> <span class="toc-text">修改build.gradle文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改项目文件夹"><span class="toc-number">1.3.</span> <span class="toc-text">修改项目文件夹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#建立对应文件"><span class="toc-number">1.4.</span> <span class="toc-text">建立对应文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注意"><span class="toc-number">1.5.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在第三方App中使用插件"><span class="toc-number">1.6.</span> <span class="toc-text">在第三方App中使用插件</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建项目"><span class="toc-number">1.</span> <span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改build-gradle文件"><span class="toc-number">2.</span> <span class="toc-text">修改build.gradle文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改项目文件夹"><span class="toc-number">3.</span> <span class="toc-text">修改项目文件夹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#建立对应文件"><span class="toc-number">4.</span> <span class="toc-text">建立对应文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注意"><span class="toc-number">5.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在第三方App中使用插件"><span class="toc-number">6.</span> <span class="toc-text">在第三方App中使用插件</span></a></li></ol>
                     </div>
                 </span>
             </div>
